@@ -1,6 +1,7 @@
 ﻿using CorporateBookshelf.Core;
 using System.IO;
 using CorporateBookshelf.Models;
+using System.Linq;
 
 namespace CorporateBookshelf.Data
 {
@@ -32,6 +33,13 @@ namespace CorporateBookshelf.Data
         public int Count()
         {
             return _db.Jobs.Count;
+        }
+
+        public bool Exists(Job job)
+        {
+            return _db.Jobs.Any(x => 
+                                    x.Id == job.Id || 
+                                    x.Name.ToUpperInvariant() == job.Name.ToUpperInvariant());
         }
 
         public void SaveChanges()

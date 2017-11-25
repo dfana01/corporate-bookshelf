@@ -19,7 +19,12 @@ namespace CorporateBookshelf.Core
         public void AddJob(Job job)
         {
             int size = (job.Name?.Trim().Length).GetValueOrDefault();
-             
+
+            if (_repository.Exists(job))
+            {
+                throw new ArgumentException("Job already exist");
+            }
+
             if (size < 5 || size > 100)
             {
                 throw new ArgumentException("Invalid name");

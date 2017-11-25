@@ -6,11 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NSubstitute;
 
 namespace CorporateBookshelf.Test
 {   
     [TestFixture]
-    public class JobDescriptionTest
+    public class JobRulesTest
     {
 
 
@@ -90,5 +91,45 @@ namespace CorporateBookshelf.Test
             rules.AddJob(job);
             Assert.Pass();
         }
+
+        [TestCase(1, Description = "Adding to time the same id")]
+        [TestCase(5, Description = "Adding to time the same id")]
+        public void ValidUniqueId(int id)
+        {
+            //Arrange
+            Job job1 = new Job { Name = "TestID1", Id = id };
+            Job job2 = new Job { Name = "TestID2", Id = id };
+
+            //Act
+            IJobRepository repo = NSubstitute.Substitute.For<IJobRepository>();
+            repo.Exists(Arg.Any<Job>()).Returns(true);
+            JobRules rules = new JobRules(repo);
+
+            //Assert
+            Assert.That(() => { rules.AddJob(job1); rules.AddJob(job2); },
+                Throws.TypeOf<ArgumentException>().With.Message.Contains("Job already exist"));
+
+        }
+
+        [TestCase("TestUniqueName  ", "  TestUniqueName", Description = "Adding to time the same name")]
+        [TestCase("TestUniqueName", "TestUniqueName", Description = "Adding to time the same name")]
+        public void ValidUniqueName(String name1, String name2)
+        {
+            //Arrange
+            Job job1 = new Job { Name = name1, Id = 1 };
+            Job job2 = new Job { Name = name2, Id = 2 };
+
+            //Act
+            IJobRepository repo = NSubstitute.Substitute.For<IJobRepository>();
+            repo.Exists(Arg.Any<Job>()).Returns(true);
+            JobRules rules = new JobRules(repo);
+
+            //Assert
+            Assert.That(() => { rules.AddJob(job1); rules.AddJob(job2); },
+                Throws.TypeOf<ArgumentException>().With.Message.Contains("Job already exist"));
+
+        }
+
+
     }
 }

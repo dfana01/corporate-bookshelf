@@ -8,5 +8,6 @@ namespace CorporateBookshelf.Core
         void Add(Job job);
 
         void SaveChanges();
+        bool Exists(Job job);
     }
 }
