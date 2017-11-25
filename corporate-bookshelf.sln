@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateBookshelf.Data", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateBookshelf.App", "CorporateBookshelf.App\CorporateBookshelf.App.csproj", "{BD76C715-2147-47A6-AE95-6F3B467AF6D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CorporateBookShelf.Models", "CorporateBookShelf.Models\CorporateBookShelf.Models.csproj", "{839EFDA6-DFA2-4AFE-AD6F-68712C4A61DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{BD76C715-2147-47A6-AE95-6F3B467AF6D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD76C715-2147-47A6-AE95-6F3B467AF6D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD76C715-2147-47A6-AE95-6F3B467AF6D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{839EFDA6-DFA2-4AFE-AD6F-68712C4A61DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{839EFDA6-DFA2-4AFE-AD6F-68712C4A61DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{839EFDA6-DFA2-4AFE-AD6F-68712C4A61DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{839EFDA6-DFA2-4AFE-AD6F-68712C4A61DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

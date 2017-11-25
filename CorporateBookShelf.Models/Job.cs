@@ -1,4 +1,4 @@
-﻿namespace CorporateBookshelf.Core
+﻿namespace CorporateBookshelf.Models
 {
     public class Job
     {

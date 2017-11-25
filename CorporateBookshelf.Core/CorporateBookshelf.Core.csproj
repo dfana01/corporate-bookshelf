@@ -41,9 +41,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="Job.cs" />
+    <Compile Include="IJobRepository.cs" />
     <Compile Include="JobRules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CorporateBookShelf.Models\CorporateBookShelf.Models.csproj">
+      <Project>{839EFDA6-DFA2-4AFE-AD6F-68712C4A61DE}</Project>
+      <Name>CorporateBookShelf.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

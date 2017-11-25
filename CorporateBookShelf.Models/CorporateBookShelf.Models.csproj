@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BD76C715-2147-47A6-AE95-6F3B467AF6D8}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>CorporateBookshelf.App</RootNamespace>
-    <AssemblyName>CorporateBookshelf.App</AssemblyName>
+    <ProjectGuid>{839EFDA6-DFA2-4AFE-AD6F-68712C4A61DE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>CorporateBookShelf.Models</RootNamespace>
+    <AssemblyName>CorporateBookShelf.Models</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -31,6 +31,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -42,30 +45,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddJobHandle.cs" />
-    <Compile Include="ExitHandle.cs" />
-    <Compile Include="InvalidOptionHandle.cs" />
-    <Compile Include="IOptionHandle.cs" />
-    <Compile Include="OptionHanldeFactory.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Job.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CorporateBookshelf.Core\CorporateBookshelf.Core.csproj">
-      <Project>{82665EA2-2D1F-474A-820A-831A660C5F39}</Project>
-      <Name>CorporateBookshelf.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CorporateBookshelf.Data\CorporateBookshelf.Data.csproj">
-      <Project>{5C202DA9-4663-4303-98B8-D8B662711595}</Project>
-      <Name>CorporateBookshelf.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CorporateBookShelf.Models\CorporateBookShelf.Models.csproj">
-      <Project>{839EFDA6-DFA2-4AFE-AD6F-68712C4A61DE}</Project>
-      <Name>CorporateBookShelf.Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

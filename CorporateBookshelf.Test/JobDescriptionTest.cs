@@ -1,4 +1,5 @@
 ﻿using CorporateBookshelf.Core;
+using CorporateBookshelf.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -20,10 +21,12 @@ namespace CorporateBookshelf.Test
             job.Id = 1;
 
             //Act
-            JobRules rules = new JobRules();
+            IJobRepository repo = NSubstitute.Substitute.For<IJobRepository>();
+            JobRules rules = new JobRules(repo);
 
             //Assert 
-            Assert.That(del: () => rules.AddJob(job), expr: Throws.ArgumentException);
+            Assert.That(() => rules.AddJob(job),
+                Throws.TypeOf<ArgumentException>().With.Message.Contains("Invalid name"));
         }
     }
 }

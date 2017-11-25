@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CorporateBookshelf.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,15 +9,22 @@ namespace CorporateBookshelf.Core
 {
     public class JobRules
     {
+        private readonly IJobRepository _repository;
 
-        public Job AddJob(Job job)
+        public JobRules(IJobRepository repository)
         {
-            return job;
+            _repository = repository;
+        }
+
+        public void AddJob(Job job)
+        {
+            //throw new ArgumentException("Invalid xyz");
+            _repository.Add(job);
         }
 
         public object Count()
         {
-            return 1;
+            return _repository.Count();
         }
     }
 }
