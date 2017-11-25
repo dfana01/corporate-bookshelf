@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace CorporateBookshelf.App
 {
-    public static class OptionHanldeFactory
+    /// <summary>
+    /// Responsible to create menu option handles.
+    /// </summary>
+    public static class OptionHandleFactory
     {
+        /// <summary>
+        /// return the specific implementation of handle.
+        /// </summary>
+        /// <param name="option"></param>
+        /// <returns></returns>
         public static IOptionHandle Create(string option)
         {
             if (option == "1")

@@ -5,7 +5,8 @@ using System.Linq;
 
 namespace CorporateBookshelf.Data
 {
-    public class JsonJobRepository : IJobRepository
+
+    internal class JsonJobRepository : IJobRepository
     {
         private readonly JsonDb _db;
         private readonly string _connectionString;
@@ -24,25 +25,25 @@ namespace CorporateBookshelf.Data
             _connectionString = connectionString;
         }
 
-        public void Add(Job job)
+        void IJobRepository.Add(Job job)
         {
-            _db.Jobs.Add(job);
-            SaveChanges();
+            _db.Jobs.Add(job); 
+            (this as IJobRepository).SaveChanges();
         }
 
-        public int Count()
+        int IJobRepository.Count()
         {
             return _db.Jobs.Count;
         }
 
-        public bool Exists(Job job)
+        bool IJobRepository.Exists(Job job)
         {
             return _db.Jobs.Any(x => 
                                     x.Id == job.Id || 
                                     x.Name.ToUpperInvariant() == job.Name.ToUpperInvariant());
         }
 
-        public void SaveChanges()
+        void IJobRepository.SaveChanges()
         {
             var content = Newtonsoft.Json.JsonConvert.SerializeObject(_db);
             File.WriteAllText(_connectionString, content);

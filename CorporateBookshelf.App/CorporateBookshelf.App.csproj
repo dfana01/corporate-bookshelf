@@ -46,7 +46,7 @@
     <Compile Include="ExitHandle.cs" />
     <Compile Include="InvalidOptionHandle.cs" />
     <Compile Include="IOptionHandle.cs" />
-    <Compile Include="OptionHanldeFactory.cs" />
+    <Compile Include="OptionHandleFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
