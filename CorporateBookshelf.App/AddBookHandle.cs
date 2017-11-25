@@ -1,6 +1,8 @@
 ﻿using CorporateBookshelf.Core;
 using CorporateBookShelf.Models;
 using System;
+using System.IO;
+using CorporateBookshelf.Data;
 
 namespace CorporateBookshelf.App
 {
@@ -18,7 +20,8 @@ namespace CorporateBookshelf.App
             book.Author = Console.ReadLine();
             try
             {
-                BookRules rules = new BookRules(null);
+                IBookRepository repository = RepositoryFactory.CreateBookRepository("json", GetCurrentPath());
+                BookRules rules = new BookRules(repository);
                 rules.Add(book);
                 Console.WriteLine($"El libro ha sido creado, Total libros: 1");
             }
@@ -27,6 +30,11 @@ namespace CorporateBookshelf.App
                 Console.Error.WriteLine(ex.Message);
             }
             return true;
+        }
+
+        private string GetCurrentPath()
+        {
+            return Path.Combine(Directory.GetCurrentDirectory(), "db.json");
         }
     }
 }
