@@ -13,8 +13,14 @@ namespace CorporateBookshelf.App
             IJobRepository repository = RepositoryFactory.CreateJobRepository("json", GetCurrentPath());
             var rules = new JobRules(repository:repository);
             Job job = RequestJobData();
-            rules.AddJob(job);
-            Console.WriteLine($"El puesto ha sido creado, Total puestos: {rules.Count()}");
+            try
+            {
+                rules.AddJob(job);
+                Console.WriteLine($"El puesto ha sido creado, Total puestos: {rules.Count()}");
+            }
+            catch (ArgumentException ex){
+                Console.Error.WriteLine(ex.Message);
+            }
             return true;
         }
 

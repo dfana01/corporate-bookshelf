@@ -18,7 +18,18 @@ namespace CorporateBookshelf.Core
 
         public void AddJob(Job job)
         {
-            //throw new ArgumentException("Invalid xyz");
+            int size = (job.Name?.Trim().Length).GetValueOrDefault();
+             
+            if (size < 5 || size > 100)
+            {
+                throw new ArgumentException("Invalid name");
+            }
+
+            if (job.Id < 1 || job.Id > 1000000)
+            {
+                throw new ArgumentException("Invalid id");
+            }
+
             _repository.Add(job);
         }
 
