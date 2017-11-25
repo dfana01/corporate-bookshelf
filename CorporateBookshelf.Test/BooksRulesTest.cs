@@ -1,5 +1,6 @@
 ﻿using CorporateBookshelf.Core;
 using CorporateBookShelf.Models;
+using NSubstitute;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -27,11 +28,12 @@ namespace CorporateBookshelf.Test
         public void InvalidISBN(string isbn)
         {
             //Arrange
-            Book book = new Book();
-            book.Id = 1;
-            book.Title = "";
-            book.Isbn = isbn;
-            book.Author = "Gabriel Garcia Marquez";
+            Book book = new Book
+            {
+                Title = "",
+                Isbn = isbn,
+                Author = "Gabriel Garcia Marquez"
+            };
 
             //Act
             IBookRepository repo = NSubstitute.Substitute.For<IBookRepository>();
@@ -49,11 +51,12 @@ namespace CorporateBookshelf.Test
         public void ValidISBN(string isbn)
         {
             //Arrange
-            Book book = new Book();
-            book.Id = 1;
-            book.Title = "Don Quijote de la mancha";
-            book.Isbn = isbn;
-            book.Author = "Gabriel Garcia Marquez";
+            Book book = new Book
+            {
+                Title = "Don Quijote de la mancha",
+                Isbn = isbn,
+                Author = "Gabriel Garcia Marquez"
+            };
 
             //Act
             IBookRepository repo = NSubstitute.Substitute.For<IBookRepository>();
@@ -74,11 +77,12 @@ namespace CorporateBookshelf.Test
         public void InvalidTitle(string title)
         {
             //Arrange
-            Book book = new Book();
-            book.Id = 1;
-            book.Isbn = "1234567890123";
-            book.Title = title;
-            book.Author = "Gabriel Garcia Marquez";
+            Book book = new Book
+            {
+                Isbn = "1234567890123",
+                Title = title,
+                Author = "Gabriel Garcia Marquez"
+            };
 
             //Act
             IBookRepository repo = NSubstitute.Substitute.For<IBookRepository>();
@@ -96,11 +100,12 @@ namespace CorporateBookshelf.Test
         public void ValidTitle(string title)
         {
             //Arrange
-            Book book = new Book();
-            book.Id = 1;
-            book.Isbn = "1234567890123";
-            book.Title = title;
-            book.Author = "Gabriel Garcia Marquez";
+            Book book = new Book
+            {
+                Isbn = "1234567890123",
+                Title = title,
+                Author = "Gabriel Garcia Marquez"
+            };
             //Act
             IBookRepository repo = NSubstitute.Substitute.For<IBookRepository>();
             BookRules rules = new BookRules(repo);
@@ -120,11 +125,12 @@ namespace CorporateBookshelf.Test
         public void InvalidAuthor(string author)
         {
             //Arrange
-            Book book = new Book();
-            book.Id = 1;
-            book.Isbn = "1234567890123";
-            book.Title = "Don quijote de la mancha";
-            book.Author = author;
+            Book book = new Book
+            {
+                Isbn = "1234567890123",
+                Title = "Don quijote de la mancha",
+                Author = author
+            };
 
             //Act
             IBookRepository repo = NSubstitute.Substitute.For<IBookRepository>();
@@ -142,11 +148,12 @@ namespace CorporateBookshelf.Test
         public void ValidAuthor(string author)
         {
             //Arrange
-            Book book = new Book();
-            book.Id = 1;
-            book.Isbn = "1234567890123";
-            book.Title = "Don quijote de la mancha";
-            book.Author = author;
+            Book book = new Book
+            {
+                Isbn = "1234567890123",
+                Title = "Don quijote de la mancha",
+                Author = author
+            };
             //Act
             IBookRepository repo = NSubstitute.Substitute.For<IBookRepository>();
             BookRules rules = new BookRules(repo);
@@ -159,7 +166,36 @@ namespace CorporateBookshelf.Test
         [Test(Description="Title cannot be duplicated")]
         public void DuplicatedTitle()
         {
+            var book1 = new Book {
+                Isbn = "1233434234334",
+                Title = "Don quijote de la mancha",
+                Author = "Miguel Servantes"
+            };
 
+            IBookRepository repo = NSubstitute.Substitute.For<IBookRepository>();
+            repo.Exists(Arg.Any<Book>()).Returns(true);
+            var rules = new BookRules(repo);
+
+            Assert.That(() => rules.Add(book1),
+                Throws.TypeOf<ArgumentException>().With.Message.Contains("Duplicated Book"));
+        }
+
+        [Test(Description = "Title cannot be duplicated")]
+        public void DuplicatedIsbn()
+        {
+            var book1 = new Book
+            {
+                Isbn = "1233434234334",
+                Title = "Don quijote de la mancha",
+                Author = "Miguel Servantes"
+            };
+
+            IBookRepository repo = NSubstitute.Substitute.For<IBookRepository>();
+            repo.Exists(Arg.Any<Book>()).Returns(true);
+            var rules = new BookRules(repo);
+
+            Assert.That(() => rules.Add(book1),
+                Throws.TypeOf<ArgumentException>().With.Message.Contains("Duplicated Book"));
         }
     }
 }

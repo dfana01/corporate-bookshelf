@@ -16,6 +16,11 @@ namespace CorporateBookshelf.Core
         {
             Validate(book);
 
+            if (_repo.Exists(book))
+            {
+                throw new ArgumentException("Duplicated Book");
+            }
+
             return book;
         }
 
