@@ -21,6 +21,8 @@ namespace CorporateBookshelf.Core
                 throw new ArgumentException("Duplicated Book");
             }
 
+            _repo.Add(book);
+
             return book;
         }
 
