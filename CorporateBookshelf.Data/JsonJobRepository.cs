@@ -2,6 +2,7 @@
 using System.IO;
 using CorporateBookshelf.Models;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace CorporateBookshelf.Data
 {
@@ -11,6 +12,10 @@ namespace CorporateBookshelf.Data
         private readonly JsonDb _db;
         private readonly string _connectionString;
 
+        /// <summary>
+        /// Initialized JSON Repository, if the file not exists then create the necessary file
+        /// </summary>
+        /// <param name="connectionString"></param>
         public JsonJobRepository(string connectionString)
         {
             if (File.Exists(connectionString))
@@ -38,14 +43,17 @@ namespace CorporateBookshelf.Data
 
         bool IJobRepository.Exists(Job job)
         {
-            return _db.Jobs.Any(x => 
-                                    x.Id == job.Id || 
-                                    x.Name.ToUpperInvariant() == job.Name.ToUpperInvariant());
+            return _db.Jobs.Any(x => AreEquals(job, x));
+        }
+
+        private static bool AreEquals(Job job, Job x)
+        {
+            return x.Id == job.Id || x.Name.ToUpperInvariant() == job.Name.ToUpperInvariant();
         }
 
         void IJobRepository.SaveChanges()
         {
-            var content = Newtonsoft.Json.JsonConvert.SerializeObject(_db);
+            var content = JsonConvert.SerializeObject(_db);
             File.WriteAllText(_connectionString, content);
         }
     }
