@@ -1,15 +1,11 @@
 ﻿using CorporateBookshelf.Core;
 using CorporateBookshelf.Models;
+using NSubstitute;
 using NUnit.Framework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NSubstitute;
 
 namespace CorporateBookshelf.Test
-{   
+{
     [TestFixture]
     public class JobRulesTest
     {
@@ -26,12 +22,14 @@ namespace CorporateBookshelf.Test
         public void InvalidName(string name)
         {
             //Arrange
-            Job job = new Job();
-            job.Id = 1;
-            job.Name = name;
-            
+            Job job = new Job
+            {
+                Id = 1,
+                Name = name
+            };
+
             //Act
-            IJobRepository repo = NSubstitute.Substitute.For<IJobRepository>();
+            IJobRepository repo = Substitute.For<IJobRepository>();
             JobRules rules = new JobRules(repo);
 
             //Assert 
@@ -39,7 +37,7 @@ namespace CorporateBookshelf.Test
                 Throws.TypeOf<ArgumentException>().With.Message.Contains("Invalid name"));
         }
 
-        [TestCase("Dante", Description = "Nombre valido")]
+        [TestCase("Dante", Description = "Name valid")]
         [TestCase("e     e", Description = "Name is valid with space between character")]
         public void ValidName(string name)
         {
@@ -47,7 +45,7 @@ namespace CorporateBookshelf.Test
             Job job = new Job { Name = name, Id = 1 };
 
             //Act
-            IJobRepository repo = NSubstitute.Substitute.For<IJobRepository>();
+            IJobRepository repo = Substitute.For<IJobRepository>();
             JobRules rules = new JobRules(repo);
 
             //Assert 
@@ -57,15 +55,15 @@ namespace CorporateBookshelf.Test
 
         [TestCase(-1, Description = "Id is invalid cause is negative(-1)")]
         [TestCase(0, Description = "Id is invalid cause is zero")]
-        [TestCase(-2, Description = "Is is invalid cause is negative(-2)")]
-        [TestCase(1000001, Description = "Is is invalid cause greater than 1MM")]
+        [TestCase(-2, Description = "Id is invalid cause is negative(-2)")]
+        [TestCase(1000001, Description = "Id is invalid cause greater than 1MM")]
         public void InvalidId(int id)
         {
             //Arrange
             Job job = new Job { Name = "TestId", Id = id };
 
             //Act
-            IJobRepository repo = NSubstitute.Substitute.For<IJobRepository>();
+            IJobRepository repo = Substitute.For<IJobRepository>();
             JobRules rules = new JobRules(repo);
 
             //Assert 
@@ -101,7 +99,7 @@ namespace CorporateBookshelf.Test
             Job job2 = new Job { Name = "TestID2", Id = id };
 
             //Act
-            IJobRepository repo = NSubstitute.Substitute.For<IJobRepository>();
+            IJobRepository repo = Substitute.For<IJobRepository>();
             repo.Exists(Arg.Any<Job>()).Returns(true);
             JobRules rules = new JobRules(repo);
 
@@ -120,7 +118,7 @@ namespace CorporateBookshelf.Test
             Job job2 = new Job { Name = name2, Id = 2 };
 
             //Act
-            IJobRepository repo = NSubstitute.Substitute.For<IJobRepository>();
+            IJobRepository repo = Substitute.For<IJobRepository>();
             repo.Exists(Arg.Any<Job>()).Returns(true);
             JobRules rules = new JobRules(repo);
 
