@@ -14,6 +14,7 @@ namespace CorporateBookshelf.Test
     {
         const string MAX_VALID_TITLE = "ddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfd";
         const string MAX_INVALID_TITLE = "dddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfd";
+        private const string MAX_VALID_AUTHOR = "dddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddfdfdfddD";
 
         [TestCase("1", Description = "Only accept 10 or 13 characters")]
         [TestCase("12-2", Description = "Only accept 10 or 13 characters")]
@@ -110,6 +111,12 @@ namespace CorporateBookshelf.Test
         }
 
         [TestCase("1", Description = "Author should be between 10 and 200")]
+        [TestCase(MAX_INVALID_TITLE, Description = "Author should be between 10 and 200")]
+        [TestCase("    e", Description = "Author should be between 10 and 200")]
+        [TestCase("e", Description = "Author should be between 10 and 200")]
+        [TestCase(" ", Description = "Author should be between 10 and 200")]
+        [TestCase("001", Description = "Author should be between 10 and 200")]
+        [TestCase(null, Description = "Author should be between 10 and 200")]
         public void InvalidAuthor(string author)
         {
             //Arrange
@@ -126,6 +133,33 @@ namespace CorporateBookshelf.Test
             //Assert 
             Assert.That(() => rules.Add(book),
                 Throws.TypeOf<ArgumentException>().With.Message.Contains("Invalid Author"));
+        }
+
+        [TestCase("abcdeabcde", Description = "The title is valid")]
+        [TestCase(MAX_VALID_AUTHOR, Description = "The title is valid")]
+        [TestCase(MAX_VALID_AUTHOR + " ", Description = "The title is valid")]
+        [TestCase(" " + MAX_VALID_AUTHOR + " ", Description = "The title is valid")]
+        public void ValidAuthor(string author)
+        {
+            //Arrange
+            Book book = new Book();
+            book.Id = 1;
+            book.Isbn = "1234567890123";
+            book.Title = "Don quijote de la mancha";
+            book.Author = author;
+            //Act
+            IBookRepository repo = NSubstitute.Substitute.For<IBookRepository>();
+            BookRules rules = new BookRules(repo);
+
+            //Assert 
+            rules.Add(book);
+            Assert.Pass();
+        }
+
+        [Test(Description="Title cannot be duplicated")]
+        public void DuplicatedTitle()
+        {
+
         }
     }
 }

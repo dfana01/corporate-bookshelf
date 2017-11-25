@@ -62,6 +62,13 @@ namespace CorporateBookshelf.Core
 
         private static void ValdiateAuthor(Book book)
         {
+            if (string.IsNullOrWhiteSpace(book.Author))
+            {
+                throw new ArgumentException("Invalid Author");
+            }
+
+            book.Author = book.Author.Trim();
+
             if (book.Author.Length < 10 || book.Author.Length > 200)
             {
                 throw new ArgumentException("Invalid Author");

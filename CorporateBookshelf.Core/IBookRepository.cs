@@ -1,6 +1,15 @@
-﻿namespace CorporateBookshelf.Core
+﻿using CorporateBookShelf.Models;
+
+namespace CorporateBookshelf.Core
 {
-    public class IBookRepository
+    public interface IBookRepository
     {
+        void Add(Book book);
+
+        int Count();
+
+        bool Exists(Book book);
+
+        void SaveChanges();
     }
 }
