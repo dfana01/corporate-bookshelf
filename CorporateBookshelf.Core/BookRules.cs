@@ -14,7 +14,40 @@ namespace CorporateBookshelf.Core
 
         public Book Add(Book book)
         {
-            if (book.Isbn?.Contains("--") || book.Isbn.StartsWith("-") || book.Isbn.EndsWith("-"))
+            Validate(book);
+
+            return book;
+        }
+
+        private static void Validate(Book book)
+        {
+            ValidateIsbn(book);
+
+            ValidateTitle(book);
+
+            ValdiateAuthor(book);
+        }
+
+       
+
+        private static void ValidateTitle(Book book)
+        {
+            if (string.IsNullOrWhiteSpace(book.Title))
+            {
+                throw new ArgumentException("Invalid Title");
+            }
+
+            book.Title = book.Title.Trim();
+            if (book.Title.Length < 5 || book.Title.Length > 1000)
+            {
+                throw new ArgumentException("Invalid Title");
+            }
+        }
+
+        private static void ValidateIsbn(Book book)
+        {
+            if (string.IsNullOrWhiteSpace(book.Isbn) || book.Isbn.Contains("--")
+                || book.Isbn.StartsWith("-") || book.Isbn.EndsWith("-"))
             {
                 throw new ArgumentException("Invalid ISBN");
             }
@@ -25,8 +58,14 @@ namespace CorporateBookshelf.Core
             {
                 throw new ArgumentException("Invalid ISBN");
             }
+        }
 
-            return book;
+        private static void ValdiateAuthor(Book book)
+        {
+            if (book.Author.Length < 10 || book.Author.Length > 200)
+            {
+                throw new ArgumentException("Invalid Author");
+            }
         }
     }
 }
