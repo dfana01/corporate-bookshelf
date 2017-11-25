@@ -18,16 +18,14 @@ namespace CorporateBookshelf.App
         /// <returns></returns>
         public static IOptionHandle Create(string option)
         {
-            if (option == "1")
+
+            switch (option)
             {
-                return new AddJobHandle();
+                case "1": return new AddJobHandle();
+                case "2": return new AddBookHandle();
+                case "0": return new ExitHandle();
+                default: return new InvalidOptionHandle();
             }
-            else if (option == "0")
-            {
-                return new ExitHandle();
-            }
-            
-            return new InvalidOptionHandle();
         }
     }
 }
