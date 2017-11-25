@@ -24,6 +24,8 @@ namespace CorporateBookshelf.Core
             return book;
         }
 
+        public int Count() => _repo.Count();
+
         private static void Validate(Book book)
         {
             ValidateIsbn(book);
@@ -32,9 +34,6 @@ namespace CorporateBookshelf.Core
 
             ValdiateAuthor(book);
         }
-
-       
-
         private static void ValidateTitle(Book book)
         {
             if (string.IsNullOrWhiteSpace(book.Title))

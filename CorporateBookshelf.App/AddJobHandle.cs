@@ -1,6 +1,6 @@
 ﻿using CorporateBookshelf.Core;
 using CorporateBookshelf.Data;
-using CorporateBookshelf.Models;
+using CorporateBookShelf.Models;
 using System;
 using System.IO;
 

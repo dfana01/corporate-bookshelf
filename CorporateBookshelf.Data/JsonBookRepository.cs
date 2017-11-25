@@ -5,29 +5,50 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CorporateBookShelf.Models;
+using System.IO;
+using Newtonsoft.Json;
 
 namespace CorporateBookshelf.Data
 {
     public class JsonBookRepository : IBookRepository
     {
-        public void Add(Book book)
+        private readonly string _connectionString;
+        private readonly JsonDb _db;
+
+        public JsonBookRepository(string connectionString)
         {
-            throw new NotImplementedException();
+            _connectionString = connectionString;
+            if (File.Exists(connectionString))
+            {
+                var jsonDb = File.ReadAllText(connectionString);
+                _db = JsonConvert.DeserializeObject<JsonDb>(jsonDb);
+            }
+            else
+            {
+                _db = new JsonDb();
+            }
         }
 
-        public int Count()
+        public void Add(Book book)
         {
-            throw new NotImplementedException();
+            _db.Books.Add(book);
+            SaveChanges();
         }
+
+        public int Count() => _db.Books.Count;
 
         public bool Exists(Book book)
         {
-            throw new NotImplementedException();
+            Func<Book, bool> AreEquals = b => b.Isbn.ToLowerInvariant() == book.Title.ToLowerInvariant() 
+                                            || b.Title.ToLowerInvariant() == book.Title.ToLowerInvariant();
+
+            return _db.Books.Any(AreEquals);
         }
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            var content = Newtonsoft.Json.JsonConvert.SerializeObject(_db);
+            File.WriteAllText(_connectionString, content);
         }
     }
 }
