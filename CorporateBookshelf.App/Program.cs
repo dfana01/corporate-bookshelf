@@ -33,7 +33,7 @@ namespace CorporateBookshelf.App
 
         private static bool DoOption(string option)
         {
-            IOptionHandle handle = OptionHanldeFactory.Create(option);
+            IOptionHandle handle = OptionHandleFactory.Create(option);
             return handle.Execute();            
         }
     }

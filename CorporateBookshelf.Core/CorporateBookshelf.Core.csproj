@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookRules.cs" />
-    <Compile Include="Class1.cs" />
     <Compile Include="IBookRepository.cs" />
     <Compile Include="IJobRepository.cs" />
     <Compile Include="JobRules.cs" />
