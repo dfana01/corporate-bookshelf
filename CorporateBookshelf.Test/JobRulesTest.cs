@@ -1,5 +1,5 @@
 ﻿using CorporateBookshelf.Core;
-using CorporateBookshelf.Models;
+using CorporateBookShelf.Models;
 using NSubstitute;
 using NUnit.Framework;
 using System;

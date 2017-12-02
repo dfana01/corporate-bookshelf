@@ -42,6 +42,8 @@
   <ItemGroup>
     <Compile Include="CollaboratorRules.cs" />
     <Compile Include="ICollaboratorRepository.cs" />
+    <Compile Include="BookRules.cs" />
+    <Compile Include="IBookRepository.cs" />
     <Compile Include="IJobRepository.cs" />
     <Compile Include="JobRules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

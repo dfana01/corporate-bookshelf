@@ -1,13 +1,13 @@
 ﻿using CorporateBookshelf.Core;
 using CorporateBookshelf.Data;
-using CorporateBookshelf.Models;
+using CorporateBookShelf.Models;
 using System;
 
 namespace CorporateBookshelf.App
 {
     internal class AddJobHandle : IOptionHandle
     {
-        public bool Execute()
+        bool IOptionHandle.Execute()
         {
             IJobRepository repository = RepositoryFactory.CreateJobRepository("json", PathUtils.GetCurrentPath(nameof(Job)));
             var rules = new JobRules(repository:repository);

@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddCollaboratorHandle.cs" />
+    <Compile Include="AddBookHandle.cs" />
     <Compile Include="AddJobHandle.cs" />
     <Compile Include="ExitHandle.cs" />
     <Compile Include="InvalidOptionHandle.cs" />

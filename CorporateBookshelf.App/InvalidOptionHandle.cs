@@ -4,7 +4,7 @@ namespace CorporateBookshelf.App
 {
     internal class InvalidOptionHandle : IOptionHandle
     {
-        public bool Execute()
+        bool IOptionHandle.Execute()
         {
             Console.WriteLine("Invalid option!");
             return true;

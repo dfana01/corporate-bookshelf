@@ -1,6 +1,7 @@
 ﻿using CorporateBookshelf.Core;
 using Newtonsoft.Json;
 using System.IO;
+using CorporateBookshelf.Models;
 
 namespace CorporateBookshelf.Data
 {
@@ -23,6 +24,10 @@ namespace CorporateBookshelf.Data
                 _db = new JsonDb();
             }
         }
-        
+
+        public void Add(Collaborator collaborator) => throw new System.NotImplementedException();
+        public int Count() => throw new System.NotImplementedException();
+        public bool Exists(int id) => throw new System.NotImplementedException();
+        public void SaveChanges() => throw new System.NotImplementedException();
     }
 }
