@@ -1,5 +1,5 @@
 ﻿using CorporateBookshelf.Core;
-using CorporateBookshelf.Models;
+using CorporateBookShelf.Models;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;

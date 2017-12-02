@@ -1,4 +1,4 @@
-﻿using CorporateBookshelf.Models;
+﻿using CorporateBookShelf.Models;
 
 namespace CorporateBookshelf.Core
 {

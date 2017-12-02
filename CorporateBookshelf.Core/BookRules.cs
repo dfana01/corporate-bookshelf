@@ -21,8 +21,12 @@ namespace CorporateBookshelf.Core
                 throw new ArgumentException("Duplicated Book");
             }
 
+            _repo.Add(book);
+
             return book;
         }
+
+        public int Count() => _repo.Count();
 
         private static void Validate(Book book)
         {
@@ -32,9 +36,6 @@ namespace CorporateBookshelf.Core
 
             ValdiateAuthor(book);
         }
-
-       
-
         private static void ValidateTitle(Book book)
         {
             if (string.IsNullOrWhiteSpace(book.Title))
