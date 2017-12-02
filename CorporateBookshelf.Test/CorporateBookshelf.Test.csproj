@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BooksRulesTest.cs" />
+    <Compile Include="CapacityRuleTest.cs" />
     <Compile Include="JobRulesTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
