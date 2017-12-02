@@ -20,10 +20,14 @@ namespace CorporateBookshelf.Test
              3 - Agregar una capacidad con un puesto que no exista
              4 - Agregar con nombres validos 
              5 - Agregar con nombres invalidados
+             6 - 
          */
 
         [TestCase("",Description = "Name should not be empty")]
-        public void NotEmpty(string name)
+        [TestCase("xyz", Description = "Name is short")]
+        [TestCase("xyjkshdaskjdhakjhdsjkhdakhdakjhjahsjdhashdkajshjkdhaskjhdjkhashdjsahdlkjashzhjkdshkjshjkdhsjhkhfjdhdjy", Description = "Name is to long")]
+        [TestCase("xyz  ", Description = "Name is short with space")]
+        public void InvalidNameErrors(string name)
         {
             Capacity capacity = new Capacity()
             {
@@ -55,7 +59,7 @@ namespace CorporateBookshelf.Test
             CapacityRules rules = new CapacityRules(repo,jobRepo);
 
             Assert.That(() => rules.Add(capacity),
-                Throws.TypeOf<ArgumentException>().With.Message.Contains("Duplicate Name"));
+                Throws.TypeOf<ArgumentException>().With.Message.Contains("Duplicated capacity"));
         }
 
         [TestCase(1, Description = "Adding job")]
@@ -97,5 +101,7 @@ namespace CorporateBookshelf.Test
             Assert.That(() => rules.Add(capacity),
                 Throws.TypeOf<ArgumentException>().With.Message.Contains("The job do not exist"));
         }
+
+        
     }
 }

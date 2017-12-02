@@ -39,5 +39,15 @@ namespace CorporateBookshelf.Data
 
             throw new NotSupportedException($"Repository Type not supported: {type}");
         }
+
+        public static ICapacityRepository CreateCapacityRepository(string type, string connectionString)
+        {
+            if (type == "json")
+            {
+                return new JsonCapacityRepository(connectionString);
+            }
+
+            throw new NotSupportedException($"Repository Type not supported: {type}");
+        }
     }
 }

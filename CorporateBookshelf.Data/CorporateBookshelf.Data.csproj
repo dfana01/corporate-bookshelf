@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\CorporateBookshelf.Data.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -44,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="JsonBookRepository.cs" />
+    <Compile Include="JsonCapacityRepository.cs" />
     <Compile Include="JsonDb.cs" />
     <Compile Include="JsonJobRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

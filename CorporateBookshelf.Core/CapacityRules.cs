@@ -16,7 +16,8 @@ namespace CorporateBookshelf.Core
 
         public void Add(Capacity capacity)
         {
-            if (capacity.Name.Length < 5 || capacity.Name.Length > 100)
+            int nameLength = capacity.Name.Trim().Length;
+            if (nameLength < 5 || nameLength > 100)
             {
                 throw new ArgumentException("Invalid Name");
             }
@@ -27,11 +28,16 @@ namespace CorporateBookshelf.Core
             }
             if (_repo.Exists(capacity))
             {
-                throw new ArgumentException("Duplicate Name");
-            }   
-            
+                throw new ArgumentException("Duplicated capacity");
+            }
+
+            _repo.Add(capacity);
+            _repo.SaveChanges();
         }
 
-        
+        public int Count()
+        {
+            return _repo.Count();
+        }
     }
 }

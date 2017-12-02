@@ -7,5 +7,6 @@ namespace CorporateBookshelf.Data
     {
         public ICollection<Job> Jobs { get; set; } = new List<Job>();
         public ICollection<Book> Books { get; internal set; } = new List<Book>();
+        public ICollection<Capacity> Capacities { get; set; } = new List<Capacity>();
     }
 }
