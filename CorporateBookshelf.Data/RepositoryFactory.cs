@@ -9,7 +9,7 @@ namespace CorporateBookshelf.Data
     public class RepositoryFactory
     {
         /// <summary>
-        /// Create a <see cref="IJobRepository"/>
+        /// Create a <see cref="JsonJobRepository"/>
         /// </summary>
         /// <param name="type"></param>
         /// <param name="connectionString"></param>
@@ -19,6 +19,22 @@ namespace CorporateBookshelf.Data
             if (type == "json")
             {
                 return new JsonJobRepository(connectionString);
+            }
+
+            throw new NotSupportedException($"Repository Type not supported: {type}");
+        }
+
+        /// <summary>
+        /// Creates a <see cref="JsonCollaboratorRepository"/>
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
+        public static ICollaboratorRepository CreateCollaboratorRepository(string type, string connectionString)
+        {
+            if (type == "json")
+            {
+                return new JsonCollaboratorRepository(connectionString);
             }
 
             throw new NotSupportedException($"Repository Type not supported: {type}");

@@ -2,7 +2,6 @@
 using CorporateBookshelf.Data;
 using CorporateBookshelf.Models;
 using System;
-using System.IO;
 
 namespace CorporateBookshelf.App
 {
@@ -10,7 +9,7 @@ namespace CorporateBookshelf.App
     {
         public bool Execute()
         {
-            IJobRepository repository = RepositoryFactory.CreateJobRepository("json", GetCurrentPath());
+            IJobRepository repository = RepositoryFactory.CreateJobRepository("json", PathUtils.GetCurrentPath(nameof(Job)));
             var rules = new JobRules(repository:repository);
             Job job = RequestJobData();
             try
@@ -22,11 +21,6 @@ namespace CorporateBookshelf.App
                 Console.Error.WriteLine(ex.Message);
             }
             return true;
-        }
-
-        private string GetCurrentPath()
-        {
-            return Path.Combine(Directory.GetCurrentDirectory(), "db.json");
         }
 
         private Job RequestJobData()

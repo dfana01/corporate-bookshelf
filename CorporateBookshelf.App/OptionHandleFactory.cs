@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CorporateBookshelf.App
+﻿namespace CorporateBookshelf.App
 {
     /// <summary>
     /// Responsible to create menu option handles.
@@ -21,6 +15,10 @@ namespace CorporateBookshelf.App
             if (option == "1")
             {
                 return new AddJobHandle();
+            }
+            else if (option == "2")
+            {
+                return new AddCollaboratorHandle();
             }
             else if (option == "0")
             {

@@ -1,12 +1,11 @@
 ﻿using CorporateBookshelf.Core;
-using System.IO;
 using CorporateBookshelf.Models;
-using System.Linq;
 using Newtonsoft.Json;
+using System.IO;
+using System.Linq;
 
 namespace CorporateBookshelf.Data
 {
-
     internal class JsonJobRepository : IJobRepository
     {
         private readonly JsonDb _db;
