@@ -1,9 +1,5 @@
 ﻿using CorporateBookShelf.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CorporateBookshelf.Core
 {
@@ -14,6 +10,10 @@ namespace CorporateBookshelf.Core
     {
         private readonly IJobRepository _repository;
 
+        /// <summary>
+        /// Initialized the job rules 
+        /// </summary>
+        /// <param name="repository"></param>
         public JobRules(IJobRepository repository)
         {
             _repository = repository;
@@ -25,25 +25,44 @@ namespace CorporateBookshelf.Core
         /// <param name="job"></param>
         public void AddJob(Job job)
         {
-            int size = (job.Name?.Trim().Length).GetValueOrDefault();
+            Validate(job);
 
-            if (_repository.Exists(job))
-            {
-                throw new ArgumentException("Job already exist");
-            }
+            _repository.Add(job);
+        }
 
-            if (size < 5 || size > 100)
-            {
-                throw new ArgumentException("Invalid name");
-            }
+        private void Validate(Job job)
+        {
+            ValidateIfNotDuplicate(job);
+            ValidateName(job);
+            ValidateId(job);
+        }
 
+        private static void ValidateId(Job job)
+        {
             if (job.Id < 1 || job.Id > 1000000)
             {
                 throw new ArgumentException("Invalid id");
             }
-
-            _repository.Add(job);
         }
+
+        private static void ValidateName(Job job)
+        {
+            int size = (job.Name?.Trim().Length).GetValueOrDefault();
+            if (size < 5 || size > 100)
+            {
+                throw new ArgumentException("Invalid name");
+            }
+        }
+
+        private void ValidateIfNotDuplicate(Job job)
+        {
+            if (_repository.Exists(job))
+            {
+                throw new ArgumentException("Job already exist");
+            }
+        }
+
+
 
         /// <summary>
         /// return quantity of jobs.

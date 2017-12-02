@@ -5,9 +5,6 @@
     /// </summary>
     public class Job
     {    
-        public Job()
-        {
-        }
 
         /// <summary>
         /// Job name
