@@ -26,12 +26,15 @@ namespace CorporateBookshelf.App
         {
             Console.WriteLine("Ingrese los datos del colaborador: ");
             Console.WriteLine();
+            Console.Write("Cedula: ");
+            string identificationNumber = Console.ReadLine();
             Console.Write("Nombre: ");
             string name = Console.ReadLine();
 
             return new Collaborator
             {
-                Name = name;
+                IdentificationNumber =  identificationNumber,
+                Name = name
             };
         }
     }

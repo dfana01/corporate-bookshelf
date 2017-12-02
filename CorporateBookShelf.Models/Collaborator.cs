@@ -9,5 +9,10 @@
         /// Collaborator Name
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Collaborator's Identification Number
+        /// </summary>
+        public string IdentificationNumber { get; set; }
     }
 }
