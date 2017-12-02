@@ -23,6 +23,7 @@ namespace CorporateBookshelf.App
             {
                 case "1": return new AddJobHandle();
                 case "2": return new AddBookHandle();
+                case "4": return new AddCapacityHandle();
                 case "0": return new ExitHandle();
                 default: return new InvalidOptionHandle();
             }
