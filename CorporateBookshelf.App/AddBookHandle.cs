@@ -23,11 +23,15 @@ namespace CorporateBookshelf.App
                 IBookRepository repository = RepositoryFactory.CreateBookRepository("json", GetCurrentPath());
                 BookRules rules = new BookRules(repository);
                 rules.Add(book);
-                Console.WriteLine($"El libro ha sido creado, Total libros: 1");
+                Console.WriteLine($"El libro ha sido creado, Total libros: {rules.Count()}");
+                Console.WriteLine();
             }
             catch (ArgumentException ex)
             {
-                Console.Error.WriteLine(ex.Message);
+                Console.WriteLine();
+                Console.Error.WriteLine($"\t{ex.Message}");
+                Console.WriteLine();
+                Console.WriteLine();
             }
             return true;
         }

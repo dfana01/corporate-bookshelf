@@ -39,8 +39,9 @@ namespace CorporateBookshelf.Data
 
         public bool Exists(Book book)
         {
-            Func<Book, bool> AreEquals = b => b.Isbn.ToLowerInvariant() == book.Title.ToLowerInvariant() 
-                                            || b.Title.ToLowerInvariant() == book.Title.ToLowerInvariant();
+            Func<Book, bool> AreEquals = b =>
+                string.Equals(b.Isbn.ToLowerInvariant(), book.Isbn.ToLowerInvariant(), StringComparison.InvariantCulture)
+                || string.Equals(b.Title.ToLowerInvariant(), book.Title.ToLowerInvariant(), StringComparison.InvariantCulture);
 
             return _db.Books.Any(AreEquals);
         }
