@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\CorporateBookshelf.App.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -43,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddBookHandle.cs" />
+    <Compile Include="AddCapacityHandle.cs" />
     <Compile Include="AddJobHandle.cs" />
     <Compile Include="ExitHandle.cs" />
     <Compile Include="InvalidOptionHandle.cs" />

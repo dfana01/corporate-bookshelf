@@ -46,9 +46,10 @@ namespace CorporateBookshelf.Data
             return _db.Jobs.Any(x => AreEquals(job, x));
         }
 
-        private static bool AreEquals(Job job, Job x)
+        private static bool AreEquals(Job newJob, Job currentJob)
         {
-            return x.Id == job.Id || x.Name.ToUpperInvariant() == job.Name.ToUpperInvariant();
+            return newJob.Id == currentJob.Id 
+                || newJob.Name?.ToUpperInvariant() == currentJob.Name?.ToUpperInvariant();
         }
 
         void IJobRepository.SaveChanges()

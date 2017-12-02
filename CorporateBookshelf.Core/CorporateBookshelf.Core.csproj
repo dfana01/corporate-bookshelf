@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\CorporateBookshelf.Core.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -41,7 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookRules.cs" />
+    <Compile Include="CapacityRules.cs" />
     <Compile Include="IBookRepository.cs" />
+    <Compile Include="ICapacityRepository.cs" />
     <Compile Include="IJobRepository.cs" />
     <Compile Include="JobRules.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
