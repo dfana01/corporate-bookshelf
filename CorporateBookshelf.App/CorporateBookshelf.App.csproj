@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddBookHandle.cs" />
     <Compile Include="AddJobHandle.cs" />
     <Compile Include="ExitHandle.cs" />
     <Compile Include="InvalidOptionHandle.cs" />

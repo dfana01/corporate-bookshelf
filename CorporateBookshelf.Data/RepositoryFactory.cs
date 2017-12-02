@@ -23,5 +23,21 @@ namespace CorporateBookshelf.Data
 
             throw new NotSupportedException($"Repository Type not supported: {type}");
         }
+
+        /// <summary>
+        /// Create a <see cref="IBookRepository"/>
+        /// </summary>
+        /// <param name="type"></param>
+        /// <param name="connectionString"></param>
+        /// <returns></returns>
+        public static IBookRepository CreateBookRepository(string type, string connectionString)
+        {
+            if (type == "json")
+            {
+                return new JsonBookRepository(connectionString);
+            }
+
+            throw new NotSupportedException($"Repository Type not supported: {type}");
+        }
     }
 }

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="JsonBookRepository.cs" />
     <Compile Include="JsonDb.cs" />
     <Compile Include="JsonJobRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,7 +2,7 @@
 {
     internal class ExitHandle : IOptionHandle
     {
-        public bool Execute()
+        bool IOptionHandle.Execute()
         {
             return false;
         }

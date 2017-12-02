@@ -1,4 +1,4 @@
-﻿namespace CorporateBookshelf.Models
+﻿namespace CorporateBookShelf.Models
 {
     /// <summary>
     /// Represents job description.
