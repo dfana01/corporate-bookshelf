@@ -6,20 +6,42 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using NUnit.Framework.Internal;
 using CorporateBookShelf.Models;
+using CorporateBookshelf.Core;
 
 namespace CorporateBookshelf.Test
 {
     [TestFixture()]
     public class CapacityRuleTest
     {
-        [Test]
-        public void NotEmpty()
+        [TestCase("",Description = "Name should not be empty")]
+        public void NotEmpty(string name)
         {
             Capacity capacity = new Capacity()
             {
                 Id=1,
-                Name=""
+                Name=name
             };
+
+            CapacityRules rules = new CapacityRules();
+
+            Assert.That(() => rules.Add(capacity),
+                Throws.TypeOf<ArgumentException>().With.Message.Contains("Invalid Name"));
         }
+
+        [TestCase("testName","testName", Description = "Name ")]
+        public void NotDuplicateName()
+        {
+            Capacity capacity = new Capacity()
+            {
+                Id = 1,
+                Name = ""
+            };
+
+            CapacityRules rules = new CapacityRules();
+
+            Assert.That(() => rules.Add(capacity),
+                Throws.TypeOf<ArgumentException>().With.Message.Contains("Invalid Name"));
+        }
+
     }
 }
