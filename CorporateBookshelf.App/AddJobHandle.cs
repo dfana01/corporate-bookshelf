@@ -1,6 +1,6 @@
 ﻿using CorporateBookshelf.Core;
 using CorporateBookshelf.Data;
-using CorporateBookshelf.Models;
+using CorporateBookShelf.Models;
 using System;
 using System.IO;
 
@@ -8,7 +8,7 @@ namespace CorporateBookshelf.App
 {
     internal class AddJobHandle : IOptionHandle
     {
-        public bool Execute()
+        bool IOptionHandle.Execute()
         {
             IJobRepository repository = RepositoryFactory.CreateJobRepository("json", GetCurrentPath());
             var rules = new JobRules(repository:repository);

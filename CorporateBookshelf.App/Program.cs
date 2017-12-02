@@ -20,11 +20,14 @@ namespace CorporateBookshelf.App
 
         private static string ShowMenu()
         {
+            Console.WriteLine("=========================================");
             Console.WriteLine("Corporate Book Shelf");
             Console.WriteLine();
             Console.WriteLine("Opciones:");
             Console.WriteLine("\t 1: Agregar Puesto");
+            Console.WriteLine("\t 2: Agregar Libro");
             Console.WriteLine("\t 0: Salir");
+            Console.WriteLine("=========================================");
             Console.WriteLine();
             Console.Write("Favor ingrese una opcion: ");
 
